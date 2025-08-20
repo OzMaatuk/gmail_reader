@@ -1,3 +1,5 @@
+# constants.py
+
 """Constants for Gmail Reader package."""
 
 # Email operation constants

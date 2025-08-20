@@ -1,3 +1,5 @@
+# gmail_reader/extractor/patterns.py
+
 """Regex patterns for verification code extraction."""
 import re
 import logging

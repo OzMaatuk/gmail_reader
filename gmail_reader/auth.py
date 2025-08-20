@@ -1,3 +1,5 @@
+# gmail_reader/auth.py
+
 import logging
 from pathlib import Path
 from typing import Optional, cast

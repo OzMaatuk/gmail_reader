@@ -1,4 +1,4 @@
-# __init__.py
+# gmail_reader/__init__.py
 
 from .client import GmailClient
 from .auth import GmailAuthenticator

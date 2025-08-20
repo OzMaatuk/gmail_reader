@@ -1,3 +1,5 @@
+# gmail_reader/config.py
+
 import logging
 import configparser
 from pathlib import Path

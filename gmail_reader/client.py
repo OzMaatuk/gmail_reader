@@ -1,3 +1,5 @@
+# gmail_reader/client.py
+
 import logging
 from typing import List, Dict, Optional
 from googleapiclient.discovery import build

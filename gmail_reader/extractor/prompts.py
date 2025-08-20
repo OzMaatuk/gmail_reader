@@ -1,3 +1,5 @@
+# gmail_reader/extractor/prompts.py
+
 """Prompt templates for LLM-based extraction."""
 from typing import Optional
 

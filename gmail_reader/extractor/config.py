@@ -1,3 +1,5 @@
+# gmail_reader/extractor/config.py
+
 """Configuration management for the extractor."""
 import logging
 from typing import Dict
