@@ -5,12 +5,12 @@ Gmail Reader - Example usage script
 import logging
 import sys
 from gmail_reader import GmailClient
+from gmail_reader.config import LOG_LEVEL, LOG_FORMAT
 
 # Configure logging
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
-)
+    level=getattr(logging, LOG_LEVEL),
+    format=LOG_FORMAT)
 logger = logging.getLogger(__name__)
 
 

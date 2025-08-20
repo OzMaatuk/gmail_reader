@@ -1,5 +1,6 @@
 import logging
 from pathlib import Path
+from typing import Optional, cast
 from google.auth.transport.requests import Request
 from google.oauth2.credentials import Credentials
 from google_auth_oauthlib.flow import InstalledAppFlow
@@ -10,14 +11,18 @@ logger = logging.getLogger(__name__)
 
 class GmailAuthenticator:
     def __init__(self, token_file: Path = TOKEN_FILE):
-        self.token_file = token_file
-        self.creds = None
+        self.token_file = Path(token_file)
+        self.creds: Optional[Credentials] = None
         
     def authenticate(self) -> Credentials:
         """Authenticate and return Gmail credentials."""
         if self.token_file.exists():
-            self.creds = Credentials.from_authorized_user_file(str(self.token_file), SCOPES)
-            logger.info("Loaded credentials from token file")
+            try:
+                self.creds = Credentials.from_authorized_user_file(str(self.token_file), SCOPES)
+                logger.info("Loaded credentials from token file")
+            except Exception as e:
+                logger.error(f"Error loading credentials: {e}")
+                self.creds = None
         
         if not self.creds or not self.creds.valid:
             if self.creds and self.creds.expired and self.creds.refresh_token:
@@ -37,13 +42,20 @@ class GmailAuthenticator:
                     },
                     SCOPES
                 )
-                self.creds = flow.run_local_server(port=8080)
+                # Explicitly cast the result to the expected type
+                result = flow.run_local_server(port=8080)
+                self.creds = cast(Credentials, result)
             
             self._save_credentials()
         
+        if not self.creds:
+            raise ValueError("Failed to obtain valid credentials")
+            
         return self.creds
     
-    def _save_credentials(self):
+    def _save_credentials(self) -> None:
         """Save credentials to token file."""
-        self.token_file.write_text(self.creds.to_json())
-        logger.info(f"Saved credentials to {self.token_file}")
+        if self.creds:
+            self.token_file.parent.mkdir(parents=True, exist_ok=True)
+            self.token_file.write_text(self.creds.to_json())
+            logger.info(f"Saved credentials to {self.token_file}")
