@@ -1,11 +1,6 @@
-import os
 import logging
 import configparser
 from pathlib import Path
-from dotenv import load_dotenv
-
-# Load environment variables
-load_dotenv()
 
 # Load config
 config = configparser.ConfigParser()
@@ -14,9 +9,10 @@ if config_path.exists():
     config.read(config_path)
 
 # OAuth settings
-CLIENT_ID = os.getenv("GMAIL_CLIENT_ID")
-CLIENT_SECRET = os.getenv("GMAIL_CLIENT_SECRET")
+# CLIENT_ID = os.getenv("GMAIL_CLIENT_ID")
+# CLIENT_SECRET = os.getenv("GMAIL_CLIENT_SECRET")
 REDIRECT_URI = config.get("oauth", "redirect_uri", fallback="http://localhost:8080")
+CRED_FILE = Path(config.get("oauth", "cred_file", fallback="cert/credentials.json"))
 SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
 # App settings

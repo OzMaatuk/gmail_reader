@@ -1,7 +1,6 @@
 # requirements.txt
 
 # Configuration
-python-dotenv
 configparser
 
 # Utilities

@@ -6,7 +6,7 @@ A simple, clean, and secure Python package for reading emails from Gmail using O
 
 - OAuth 2.0 authentication for secure access
 - Simple and intuitive API
-- Configurable settings via environment variables and config files
+- Configurable settings via config files
 - Comprehensive logging
 - Type hints for better code clarity
 - Token persistence to avoid repeated authentication
@@ -20,7 +20,6 @@ gmail-reader/
 │   ├── auth.py           # OAuth 2.0 authentication handler
 │   ├── client.py         # Gmail API client implementation
 │   └── config.py         # Configuration management
-├── .env.example          # Example environment variables
 ├── config.ini            # Application configuration
 ├── requirements.txt      # Package dependencies
 ├── setup.py             # Package setup file
@@ -28,22 +27,29 @@ gmail-reader/
 └── README.md            # This file
 ```
 
-## Prerequisites
+## Setup Instructions
 
-Before using this package, you need to set up a Google Cloud Project and enable the Gmail API:
+1. **Create Google Cloud Project**:
+   - Go to [Google Cloud Console](https://console.cloud.google.com/)
+   - Create a new project
+   - Enable Gmail API
 
-1. Go to [Google Cloud Console](https://console.cloud.google.com/)
-2. Create a new project or select an existing one
-3. Enable the Gmail API:
-   - Go to "APIs & Services" > "Library"
-   - Search for "Gmail API"
-   - Click on it and press "Enable"
-4. Create OAuth 2.0 credentials:
-   - Go to "APIs & Services" > "Credentials"
+2. **Create OAuth 2.0 Credentials**:
+   - Go to APIs & Services > Credentials
    - Click "Create Credentials" > "OAuth client ID"
-   - Choose "Desktop app" as the application type
-   - Give it a name (e.g., "Gmail Reader")
-   - Download the credentials (you'll need the client ID and secret)
+   - Choose "Desktop app"
+   - Download the credentials JSON file
+   - Save it as `credentials.json` in your project root
+
+3. **First Run**:
+   - The app will open a browser for authentication
+   - Grant the requested permissions
+   - The `token.json` will be created automatically
+   - Future runs will use the saved token
+
+## Security Notes
+- Never commit `credentials.json` or `token.json` to version control
+- Add both files to `.gitignore`
 
 ## Installation
 
@@ -71,24 +77,14 @@ pip install -r requirements.txt
 
 ## Configuration
 
-1. **Environment Variables**: Copy `.env.example` to `.env` and fill in your credentials:
-```bash
-cp .env.example .env
-```
-
-Edit `.env`:
-```
-GMAIL_CLIENT_ID=your_client_id_here
-GMAIL_CLIENT_SECRET=your_client_secret_here
-```
-
-2. **Config File**: The `config.ini` file contains application settings:
+1. **Config File**: The `config.ini` file contains application settings:
 ```ini
 [oauth]
 redirect_uri = http://localhost:8080
+cred_file = cert/credentials.json
 
 [app]
-token_file = token.json
+token_file = cert/token.json
 max_results = 10
 
 [logging]
@@ -180,7 +176,7 @@ Subsequent runs will use the saved token automatically.
 
 ## Security Notes
 
-- Never commit your `.env` file or `token.json` to version control
+- Never commit your `credentials.json` file or `token.json` to version control
 - The `token.json` file contains sensitive authentication data
 - Use appropriate file permissions for credential files
 - Consider encrypting stored tokens in production environments
@@ -200,7 +196,7 @@ Subsequent runs will use the saved token automatically.
 ### Common Issues
 
 1. **"Credentials not found" error**
-   - Ensure `.env` file exists with correct credentials
+   - Ensure `credentials.json` file exists with correct credentials
    - Check that `GMAIL_CLIENT_ID` and `GMAIL_CLIENT_SECRET` are set
 
 2. **"Access blocked" error**
