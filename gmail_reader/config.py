@@ -20,8 +20,8 @@ REDIRECT_URI = config.get("oauth", "redirect_uri", fallback="http://localhost:80
 SCOPES = ["https://www.googleapis.com/auth/gmail.readonly"]
 
 # App settings
-TOKEN_FILE = Path(config.get("app", "token_file", fallback="token.json"))
-MAX_RESULTS = config.getint("app", "max_results", fallback=10)
+TOKEN_FILE = Path(config.get("app", "token_file", fallback="cert/token.json"))
+MAX_RESULTS = config.getint("app", "max_results", fallback=3)
 
 # Logging configuration
 LOG_LEVEL = config.get("logging", "level", fallback="INFO")
