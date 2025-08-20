@@ -1,0 +1,8 @@
+# environment.yaml
+
+name: gmail_reader
+channels:
+  - defaults
+dependencies:
+  - python
+  - pip
