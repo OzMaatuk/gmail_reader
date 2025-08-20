@@ -7,7 +7,6 @@ import logging
 import sys
 from gmail_reader import GmailClient
 from gmail_reader.extractor import VerificationCodeExtractor
-from gmail_reader.config import LOG_LEVEL, LOG_FORMAT
 from constants import (
     DEFAULT_MAX_RESULTS,
     RECENT_EMAILS_DISPLAY_LIMIT,
@@ -27,7 +26,9 @@ from constants import (
     MSG_OPERATION_CANCELLED,
     MSG_ALL_COMPLETED,
     APP_NAME,
-    APP_VERSION
+    APP_VERSION,
+    LOG_LEVEL,
+    LOG_FORMAT
 )
 
 # Configure logging

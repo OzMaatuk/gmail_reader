@@ -23,8 +23,7 @@ MAX_RESULTS = config.getint("app", "max_results", fallback=3)
 
 # Logging configuration
 LOG_LEVEL = config.get("logging", "level", fallback="INFO")
-LOG_FORMAT = config.get("logging", "format", 
-                       fallback="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
+LOG_FORMAT = config.get("logging", "format", fallback="%(asctime)s - %(name)s - %(levelname)s - %(message)s")
 
 # Configure logging
 logging.basicConfig(level=getattr(logging, LOG_LEVEL), format=LOG_FORMAT)

@@ -40,6 +40,7 @@ gmail-reader/
    - Choose "Desktop app"
    - Download the credentials JSON file
    - Save it as `credentials.json` in your project root
+   - Add your account as tester in "OAuth Consent Screen Configuration" > "Audience"
 
 3. **First Run**:
    - The app will open a browser for authentication

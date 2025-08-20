@@ -3,10 +3,10 @@
 """Constants for Gmail Reader package."""
 
 # Email operation constants
-DEFAULT_MAX_RESULTS = 10
-RECENT_EMAILS_DISPLAY_LIMIT = 5
-VERIFICATION_EMAILS_PROCESS_LIMIT = 10
-VERIFICATION_CODES_DISPLAY_LIMIT = 5
+DEFAULT_MAX_RESULTS = 3
+RECENT_EMAILS_DISPLAY_LIMIT = 3
+VERIFICATION_EMAILS_PROCESS_LIMIT = 3
+VERIFICATION_CODES_DISPLAY_LIMIT = 3
 
 # Search queries
 SEARCH_QUERIES = {
@@ -51,3 +51,7 @@ MSG_ALL_COMPLETED = "All demonstrations completed successfully!"
 # Application info
 APP_NAME = "Gmail Reader Demo Application"
 APP_VERSION = "0.1.0"
+
+# Logging
+LOG_FORMAT = "%(asctime)s | %(levelname)s | %(name)s | %(message)s"
+LOG_LEVEL = "INFO"
